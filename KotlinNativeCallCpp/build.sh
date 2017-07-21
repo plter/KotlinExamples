@@ -22,14 +22,20 @@ cd ..
 mkdir nlib
 cd nlib
 echo "Compile cpp sources into llvm code"
-clang++ -c ${CWD}/c/hello.cpp -o hello.bc -emit-llvm
+
+clang++ -emit-llvm -c\
+ ${CWD}/c/hello.cpp\
+ ${CWD}/c/Hi.cpp
 checkResult
 
 cd ..
 cd ..
 cd src
 echo "Compile kotlin app"
-kotlinc main.kt -library ${CWD}/build/klib/callc.klib -nativelibrary ${CWD}/build/nlib/hello.bc -o ../build/callcpp
+kotlinc main.kt -library ${CWD}/build/klib/callc.klib\
+ -nativelibrary ${CWD}/build/nlib/Hi.bc\
+ -nativelibrary ${CWD}/build/nlib/hello.bc\
+   -o ../build/callcpp
 checkResult
 
 echo "Completed!"
