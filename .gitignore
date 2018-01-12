@@ -3,3 +3,4 @@ build
 lib
 .DS_Store
 out
+cmake-build-debug
